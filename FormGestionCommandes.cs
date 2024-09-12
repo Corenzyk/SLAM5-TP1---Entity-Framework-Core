@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SLAM5_TP1___Entity_Framework_Core
 {
@@ -29,24 +31,33 @@ namespace SLAM5_TP1___Entity_Framework_Core
         private void btnValide_Click(object sender, EventArgs e)
         {
             DateTime check;
-            if (cbClients.SelectedIndex == -1 || numMontant.Value <= 0 || (DateTime.TryParse(dtpDate.Text, out check) && check < DateTime.Now))
+            string message="";
+            if (cbClients.SelectedIndex == -1 || numMontant.Value <= 0 || (DateTime.TryParse(dtpDate.Text, out check) && check > DateTime.Now))
             {
                 if (cbClients.SelectedIndex == -1)
                 {
-                    //Ajouter message client
+                    message += "\n Le client n'a pas été renseigné";
                 }
                 if (numMontant.Value <= 0)
                 {
-                    //Ajouter message montant
+                    message += "\n Le montant n'est pas valide";
                 }
-                if (DateTime.TryParse(dtpDate.Text, out check) && check != DateTime.Now)
+                if (DateTime.TryParse(dtpDate.Text, out check) && check > DateTime.Now)
                 {
-                    //Ajouter message date
+                    message += "\n La date ne convient pas (dans le futur)";
                 }
+                MessageBox.Show("Des erreurs ont été detecté :"+message);
             }
             else
             {
-                //Enregistrer commande dans la BDD
+                if (Modele.AjoutCommande(Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue)))
+                {
+                    MessageBox.Show("Enregistrement réussi");
+                }
+                else
+                {
+                    MessageBox.Show("L'enregistrement à échoué");
+                }
             }
         }
 

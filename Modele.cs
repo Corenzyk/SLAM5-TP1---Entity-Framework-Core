@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SLAM5_TP1___Entity_Framework_Core.Entities;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace SLAM5_TP1___Entity_Framework_Core
 {
@@ -49,5 +51,28 @@ namespace SLAM5_TP1___Entity_Framework_Core
            montant).Include(p => p.NumcliNavigation).ToList();
             return lesCommandes;
         }
+
+        public static bool AjoutCommande(int montant, DateTime dateC, int idClient)
+        {
+            Commande maCommande;
+            bool vretour = true;
+            try
+            {
+                maCommande = new Commande();
+                maCommande.Montantcde = montant; // mise à jour des propriétés
+                maCommande.Datecde = System.DateOnly.FromDateTime(dateC); // la propriété DateCde doit être en DateTime dans la BD et dans la classe Commande, modifier si besoin.
+                maCommande.Numcli = idClient;
+
+                // ajout de l’objet : correspond à un insert
+                monModel.Commandes.Add(maCommande);
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+            }
+            return vretour;
+        }
+
     }
 }
