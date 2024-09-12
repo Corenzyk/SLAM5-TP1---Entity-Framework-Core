@@ -36,7 +36,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
 
         public static List<Commande> listeCommandesParMontant(int montant)
         {
-            List<Commande> lesCommandes = monModel.Commandes.Where(m => m.Montantcde ==
+            List<Commande> lesCommandes = monModel.Commandes.Where(p => p.Montantcde >=
            montant).Include(p => p.NumcliNavigation).ToList();
             return lesCommandes;
         }

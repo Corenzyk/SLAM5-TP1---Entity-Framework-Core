@@ -34,6 +34,7 @@
             cbClients = new ComboBox();
             bsClients2 = new BindingSource(components);
             numMontant = new NumericUpDown();
+            btnReset = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -69,17 +70,28 @@
             // 
             // numMontant
             // 
-            numMontant.Location = new Point(615, 26);
+            numMontant.Location = new Point(469, 26);
             numMontant.Name = "numMontant";
             numMontant.Size = new Size(120, 23);
             numMontant.TabIndex = 3;
             numMontant.ValueChanged += numMontant_ValueChanged;
+            // 
+            // btnReset
+            // 
+            btnReset.Location = new Point(632, 26);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(75, 23);
+            btnReset.TabIndex = 4;
+            btnReset.Text = "Reinitialiser";
+            btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += btnReset_Click;
             // 
             // ListeCde
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnReset);
             Controls.Add(numMontant);
             Controls.Add(cbClients);
             Controls.Add(dgvCommandes);
@@ -101,5 +113,6 @@
         private ComboBox cbClients;
         private BindingSource bsClients2;
         private NumericUpDown numMontant;
+        private Button btnReset;
     }
 }

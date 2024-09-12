@@ -15,6 +15,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
         public ListeCde()
         {
             InitializeComponent();
+            cbClients.SelectedIndex = -1;
             cbClients.ValueMember = "NUMCLI";
             cbClients.DisplayMember = "nomComplet"; // nomComplet est la concaténation du nom et prénom issu de la requête suivante
             bsClients2.DataSource = (Modele.listeClients()).Select(x => new
@@ -34,7 +35,8 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.Montantcde,
                 x.Datecde,
                 x.NumcliNavigation.Nomcli,
-                x.NumcliNavigation.Prenomcli
+                x.NumcliNavigation.Prenomcli,
+                x.Numparts.Libpart
             });  // appel de la méthode listeClients
             dgvCommandes.DataSource = bsCommandes;
         }
@@ -59,7 +61,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
         private void numMontant_ValueChanged(object sender, EventArgs e)
         {
             int montant = Convert.ToInt32(numMontant.Value);
-            bsCommandes.DataSource = Modele.listeCommandesParClient(montant).Select(x => new
+            bsCommandes.DataSource = Modele.listeCommandesParMontant(montant).Select(x => new
             {
                 x.Numcde,
                 x.Datecde,
@@ -68,6 +70,21 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.NumcliNavigation.Prenomcli
             }).OrderBy(x => x.Montantcde);
             dgvCommandes.DataSource = bsCommandes;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            bsCommandes.DataSource = Modele.listeCommandes().Select(x => new
+            {
+                x.Numcde,
+                x.Montantcde,
+                x.Datecde,
+                x.NumcliNavigation.Nomcli,
+                x.NumcliNavigation.Prenomcli
+            }).OrderBy(x => x.Datecde); ;  // appel de la méthode listeClients
+            dgvCommandes.DataSource = bsCommandes;
+            numMontant.Value = 0;
+            cbClients.SelectedIndex = -1;
         }
     }
 }
