@@ -97,11 +97,12 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 List<Partition> lesPartitions = Modele.listePartitionsParCommandes(numC);
                 if (lesPartitions.Count != 0)
                 {
-                    bsPartitions2.DataSource = (lesPartitions).Select(static x => new
+                    bsPartitions2.DataSource = lesPartitions.Select(x => new
                     {
                         x.Numpart,
-                        x.Libpart
-                    });
+                        x.Libpart,
+                        x.NumstyleNavigation
+                    }).OrderBy(x => x.NumstyleNavigation);  ;
 
                     dgvPartition.DataSource = bsPartitions2;
                     dgvPartition.Visible = true;
