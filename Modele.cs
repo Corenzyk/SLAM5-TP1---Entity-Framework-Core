@@ -27,6 +27,15 @@ namespace SLAM5_TP1___Entity_Framework_Core
             return monModel.Commandes.Include(a => a.NumcliNavigation).ToList();
         }
 
+        public static List<Partition> listePartitionsParCommandes(int idC)
+        {
+            Commande c = Modele.monModel.Commandes.Include(p => p.Numparts).First(x => x.Numcde == idC);
+
+            List<Partition> lesP = c.Numparts.ToList();
+
+            return lesP;
+        }
+
         public static List<Commande> listeCommandesParClient(int idClient)
         {
             List<Commande> lesCommandes = monModel.Commandes.Where(p => p.Numcli ==

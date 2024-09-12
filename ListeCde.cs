@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SLAM5_TP1___Entity_Framework_Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,8 +36,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.Montantcde,
                 x.Datecde,
                 x.NumcliNavigation.Nomcli,
-                x.NumcliNavigation.Prenomcli,
-                x.Numparts.Libpart
+                x.NumcliNavigation.Prenomcli
             });  // appel de la méthode listeClients
             dgvCommandes.DataSource = bsCommandes;
         }
@@ -85,6 +85,34 @@ namespace SLAM5_TP1___Entity_Framework_Core
             dgvCommandes.DataSource = bsCommandes;
             numMontant.Value = 0;
             cbClients.SelectedIndex = -1;
+        }
+
+        private void dgvCommandes_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                System.Type type = bsCommandes.Current.GetType();
+                int numC = (int)type.GetProperty("Numcde").GetValue(bsCommandes.Current, null);
+
+                List<Partition> lesPartitions = Modele.listePartitionsParCommandes(numC);
+                if (lesPartitions.Count != 0)
+                {
+                    bsPartitions2.DataSource = (lesPartitions).Select(static x => new
+                    {
+                        x.Numpart,
+                        x.Libpart
+                    });
+
+                    dgvPartition.DataSource = bsPartitions2;
+                    dgvPartition.Visible = true;
+
+                }
+                else
+                {
+                    dgvPartition.Visible = false;
+                    MessageBox.Show("Pas de partitions pour cette commande");
+                }
+            }
         }
     }
 }
