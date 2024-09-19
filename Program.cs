@@ -12,7 +12,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FormGestionCommandes());
+            Application.Run(new ListeCde());
         }
     }
 }

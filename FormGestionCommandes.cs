@@ -63,7 +63,9 @@ namespace SLAM5_TP1___Entity_Framework_Core
 
         private void btnAnnule_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
+            ListeCde commande = new ListeCde();
+            commande.Show();
         }
     }
 }

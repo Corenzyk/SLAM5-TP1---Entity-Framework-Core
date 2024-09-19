@@ -114,6 +114,7 @@
             btnAjout.TabIndex = 6;
             btnAjout.Text = "Ajouter une commande";
             btnAjout.UseVisualStyleBackColor = true;
+            btnAjout.Click += btnAjout_Click;
             // 
             // ListeCde
             // 
@@ -126,7 +127,7 @@
             Controls.Add(numMontant);
             Controls.Add(cbClients);
             Controls.Add(dgvCommandes);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "ListeCde";
             Text = "Form1";
             Load += ListeCde_Load;

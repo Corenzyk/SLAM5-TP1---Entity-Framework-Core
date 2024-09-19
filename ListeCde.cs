@@ -102,7 +102,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
                         x.Numpart,
                         x.Libpart,
                         x.NumstyleNavigation
-                    }).OrderBy(x => x.NumstyleNavigation);  ;
+                    }).OrderBy(x => x.NumstyleNavigation); ;
 
                     dgvPartition.DataSource = bsPartitions2;
                     dgvPartition.Visible = true;
@@ -114,6 +114,13 @@ namespace SLAM5_TP1___Entity_Framework_Core
                     MessageBox.Show("Pas de partitions pour cette commande");
                 }
             }
+        }
+
+        private void btnAjout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormGestionCommandes gestion = new FormGestionCommandes();
+            gestion.Show();
         }
     }
 }
