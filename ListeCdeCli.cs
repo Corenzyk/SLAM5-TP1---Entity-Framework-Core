@@ -128,8 +128,15 @@ namespace SLAM5_TP1___Entity_Framework_Core
         private void btnAjout_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormGestionCommandes gestion = new FormGestionCommandes();
+            FormGestionCommandes gestion = new FormGestionCommandes(0);
             gestion.Show();
+        }
+
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            System.Type type = bsCommandes.Current.GetType();
+            int idCommande = (int)type.GetProperty("NUMCDE").GetValue(bsCommandes.Current, null);
+            
         }
     }
 }

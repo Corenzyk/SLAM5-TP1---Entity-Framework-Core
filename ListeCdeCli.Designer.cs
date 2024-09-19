@@ -40,6 +40,7 @@
             btnAjout = new Button();
             bsClients = new BindingSource(components);
             dgvClients = new DataGridView();
+            btnModifier = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -132,11 +133,22 @@
             dgvClients.Size = new Size(532, 426);
             dgvClients.TabIndex = 7;
             // 
+            // btnModifier
+            // 
+            btnModifier.Location = new Point(655, 41);
+            btnModifier.Name = "btnModifier";
+            btnModifier.Size = new Size(160, 23);
+            btnModifier.TabIndex = 8;
+            btnModifier.Text = "Modifier une commande";
+            btnModifier.UseVisualStyleBackColor = true;
+            btnModifier.Click += btnModifier_Click;
+            // 
             // ListeCdeCli
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1365, 450);
+            Controls.Add(btnModifier);
             Controls.Add(dgvClients);
             Controls.Add(btnAjout);
             Controls.Add(dgvPartition);
@@ -172,5 +184,6 @@
         private Button btnAjout;
         private BindingSource bsClients;
         private DataGridView dgvClients;
+        private Button btnModifier;
     }
 }

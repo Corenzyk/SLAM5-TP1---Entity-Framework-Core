@@ -14,7 +14,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
 {
     public partial class FormGestionCommandes : Form
     {
-        public FormGestionCommandes()
+        public FormGestionCommandes(int modifajout)
         {
             InitializeComponent();
             cbClients.SelectedIndex = -1;
@@ -26,6 +26,10 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 nomComplet = x.Nomcli + " " + x.Prenomcli
             });
             cbClients.DataSource = bsClients3;
+            if (modifajout == 1)
+            {
+
+            }
         }
 
         private void btnValide_Click(object sender, EventArgs e)
@@ -53,6 +57,9 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 if (Modele.AjoutCommande(Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue)))
                 {
                     MessageBox.Show("Enregistrement réussi");
+                    cbClients.SelectedIndex = -1;
+                    numMontant.Value = 0;
+                    dtpDate.Value = DateTime.Now;
                 }
                 else
                 {

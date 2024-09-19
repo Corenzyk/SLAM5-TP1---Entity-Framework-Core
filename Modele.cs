@@ -52,6 +52,21 @@ namespace SLAM5_TP1___Entity_Framework_Core
             return lesCommandes;
         }
 
+        public static Commande RecupererCommande(int idCommande)
+        {
+            Commande uneCommande = new Commande();
+            try
+            {
+                uneCommande = monModel.Commandes.Include(c => c.Numparts).First(x =>
+               x.Numcde == idCommande);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return uneCommande;
+        }
+
         public static bool AjoutCommande(int montant, DateTime dateC, int idClient)
         {
             Commande maCommande;
