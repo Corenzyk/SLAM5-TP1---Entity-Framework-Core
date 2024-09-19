@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace SLAM5_TP1___Entity_Framework_Core
 {
-    public partial class ListeCde : Form
+    public partial class ListeCdeCli : Form
     {
-        public ListeCde()
+        public ListeCdeCli()
         {
             InitializeComponent();
             cbClients.SelectedIndex = -1;
@@ -39,6 +39,15 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.NumcliNavigation.Prenomcli
             });  // appel de la méthode listeClients
             dgvCommandes.DataSource = bsCommandes;
+            bsClients.DataSource = Modele.listeClients().Select(x => new
+            {
+                x.Numcli,
+                x.Nomcli,
+                x.Prenomcli,
+                x.Adrcli,
+                x.Tel
+            }); // appel de la méthode listeClients
+            dgvClients.DataSource = bsClients;
         }
 
         private void bsClients2_CurrentChanged_1(object sender, EventArgs e)

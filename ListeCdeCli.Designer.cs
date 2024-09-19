@@ -1,6 +1,6 @@
 ﻿namespace SLAM5_TP1___Entity_Framework_Core
 {
-    partial class ListeCde
+    partial class ListeCdeCli
     {
         /// <summary>
         /// Required designer variable.
@@ -38,12 +38,16 @@
             dgvPartition = new DataGridView();
             bsPartitions2 = new BindingSource(components);
             btnAjout = new Button();
+            bsClients = new BindingSource(components);
+            dgvClients = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numMontant).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPartition).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsPartitions2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsClients).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
             SuspendLayout();
             // 
             // dgvCommandes
@@ -99,16 +103,15 @@
             dgvPartition.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvPartition.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvPartition.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPartition.Enabled = false;
             dgvPartition.Location = new Point(468, 304);
             dgvPartition.Name = "dgvPartition";
-            dgvPartition.Size = new Size(320, 134);
+            dgvPartition.Size = new Size(347, 134);
             dgvPartition.TabIndex = 5;
             dgvPartition.Visible = false;
             // 
             // btnAjout
             // 
-            btnAjout.Location = new Point(628, 12);
+            btnAjout.Location = new Point(655, 12);
             btnAjout.Name = "btnAjout";
             btnAjout.Size = new Size(160, 23);
             btnAjout.TabIndex = 6;
@@ -116,11 +119,25 @@
             btnAjout.UseVisualStyleBackColor = true;
             btnAjout.Click += btnAjout_Click;
             // 
-            // ListeCde
+            // dgvClients
+            // 
+            dgvClients.AllowUserToAddRows = false;
+            dgvClients.AllowUserToDeleteRows = false;
+            dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvClients.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvClients.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClients.Location = new Point(821, 12);
+            dgvClients.Name = "dgvClients";
+            dgvClients.Size = new Size(532, 426);
+            dgvClients.TabIndex = 7;
+            // 
+            // ListeCdeCli
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1365, 450);
+            Controls.Add(dgvClients);
             Controls.Add(btnAjout);
             Controls.Add(dgvPartition);
             Controls.Add(btnReset);
@@ -128,7 +145,7 @@
             Controls.Add(cbClients);
             Controls.Add(dgvCommandes);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "ListeCde";
+            Name = "ListeCdeCli";
             Text = "Form1";
             Load += ListeCde_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).EndInit();
@@ -137,6 +154,8 @@
             ((System.ComponentModel.ISupportInitialize)numMontant).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvPartition).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsPartitions2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsClients).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
             ResumeLayout(false);
         }
 
@@ -151,5 +170,7 @@
         private DataGridView dgvPartition;
         private BindingSource bsPartitions2;
         private Button btnAjout;
+        private BindingSource bsClients;
+        private DataGridView dgvClients;
     }
 }
