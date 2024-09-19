@@ -31,7 +31,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
 
         public static List<Partition> listePartitionsParCommandes(int idC)
         {
-            Commande c = Modele.monModel.Commandes.Include(p => p.Numparts).First(x => x.Numcde == idC);
+            Commande c = Modele.monModel.Commandes.Include(p => p.Numparts).ThenInclude(p => p.NumstyleNavigation).First(x => x.Numcde == idC);
 
             List<Partition> lesP = c.Numparts.ToList();
 
