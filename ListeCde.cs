@@ -101,8 +101,8 @@ namespace SLAM5_TP1___Entity_Framework_Core
                     {
                         x.Numpart,
                         x.Libpart,
-                        x.NumstyleNavigation.Libstyle
-                    });
+                        x.NumstyleNavigation
+                    }).OrderBy(x => x.NumstyleNavigation); ;
 
                     dgvPartition.DataSource = bsPartitions2;
                     dgvPartition.Visible = true;
