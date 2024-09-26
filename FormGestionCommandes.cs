@@ -76,10 +76,6 @@ namespace SLAM5_TP1___Entity_Framework_Core
                         numMontant.Value = 0;
                         dtpDate.Value = DateTime.Now;
                     }
-                    else
-                    {
-                        MessageBox.Show("L'enregistrement à échoué");
-                    }
                 }
                 else
                 {
@@ -92,10 +88,6 @@ namespace SLAM5_TP1___Entity_Framework_Core
                         label1.Text = "Ajout d'une commande";
                         label5.Visible = false;
                         label6.Visible = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("L'enregistrement à échoué");
                     }
                 }
             }

@@ -41,6 +41,7 @@
             bsClients = new BindingSource(components);
             dgvClients = new DataGridView();
             btnModifier = new Button();
+            btnSuppr = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -104,7 +105,7 @@
             dgvPartition.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvPartition.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvPartition.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPartition.Location = new Point(468, 162);
+            dgvPartition.Location = new Point(468, 133);
             dgvPartition.Name = "dgvPartition";
             dgvPartition.Size = new Size(347, 218);
             dgvPartition.TabIndex = 5;
@@ -112,7 +113,7 @@
             // 
             // btnAjout
             // 
-            btnAjout.Location = new Point(468, 386);
+            btnAjout.Location = new Point(468, 357);
             btnAjout.Name = "btnAjout";
             btnAjout.Size = new Size(347, 23);
             btnAjout.TabIndex = 6;
@@ -135,7 +136,7 @@
             // 
             // btnModifier
             // 
-            btnModifier.Location = new Point(468, 415);
+            btnModifier.Location = new Point(468, 386);
             btnModifier.Name = "btnModifier";
             btnModifier.Size = new Size(347, 23);
             btnModifier.TabIndex = 8;
@@ -143,11 +144,22 @@
             btnModifier.UseVisualStyleBackColor = true;
             btnModifier.Click += btnModifier_Click;
             // 
+            // btnSuppr
+            // 
+            btnSuppr.Location = new Point(468, 415);
+            btnSuppr.Name = "btnSuppr";
+            btnSuppr.Size = new Size(347, 23);
+            btnSuppr.TabIndex = 9;
+            btnSuppr.Text = "Supprimer une commande";
+            btnSuppr.UseVisualStyleBackColor = true;
+            btnSuppr.Click += btnSuppr_Click;
+            // 
             // ListeCdeCli
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1365, 450);
+            Controls.Add(btnSuppr);
             Controls.Add(btnModifier);
             Controls.Add(dgvClients);
             Controls.Add(btnAjout);
@@ -185,5 +197,6 @@
         private BindingSource bsClients;
         private DataGridView dgvClients;
         private Button btnModifier;
+        private Button btnSuppr;
     }
 }

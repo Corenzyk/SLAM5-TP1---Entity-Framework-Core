@@ -84,6 +84,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
             catch (Exception ex)
             {
                 vretour = false;
+                MessageBox.Show("Échec de l'ajout");
             }
             return vretour;
         }
@@ -106,9 +107,27 @@ namespace SLAM5_TP1___Entity_Framework_Core
             catch (Exception ex)
             {
                 vretour = false;
+                MessageBox.Show("Échec de la modification");
             }
             return vretour;
         }
 
+        public static bool SuppCommande(int idCommande)
+        {
+            bool vretour = true;
+            try
+            {
+                Commande maCommande = RecupererCommande(idCommande);
+                monModel.Commandes.Remove(maCommande); // correspond au DELETE
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                vretour = false;
+                MessageBox.Show("Échec de la suppression");
+            }
+            return vretour;
+        }
     }
 }

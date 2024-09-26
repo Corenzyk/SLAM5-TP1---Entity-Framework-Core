@@ -89,7 +89,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.Datecde,
                 x.NumcliNavigation.Nomcli,
                 x.NumcliNavigation.Prenomcli
-            }).OrderBy(x => x.Datecde); ;  // appel de la méthode listeClients
+            });
             dgvCommandes.DataSource = bsCommandes;
             numMontant.Value = 0;
             cbClients.SelectedIndex = -1;
@@ -138,6 +138,25 @@ namespace SLAM5_TP1___Entity_Framework_Core
             this.Hide();
             FormGestionCommandes gestion = new FormGestionCommandes(idCommande);
             gestion.Show();
+        }
+
+        private void btnSuppr_Click(object sender, EventArgs e)
+        {
+            System.Type type = bsCommandes.Current.GetType();
+            int idCommande = (int)type.GetProperty("Numcde").GetValue(bsCommandes.Current, null);
+            if (MessageBox.Show("Etes vous sur de vouloir supprimer la commande :" + idCommande, "Suppression", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Modele.SuppCommande(idCommande);
+                bsCommandes.DataSource = Modele.listeCommandes().Select(x => new
+                {
+                    x.Numcde,
+                    x.Montantcde,
+                    x.Datecde,
+                    x.NumcliNavigation.Nomcli,
+                    x.NumcliNavigation.Prenomcli
+                });
+                dgvCommandes.DataSource = bsCommandes;
+            }
         }
     }
 }
