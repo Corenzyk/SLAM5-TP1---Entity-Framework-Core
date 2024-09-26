@@ -9,9 +9,9 @@ public partial class Commande
 
     public int Numcde { get; set; }
 
-    public DateOnly? Datecde { get; set; }
+    public DateOnly Datecde { get; set; }
 
-    public int? Montantcde { get; set; }
+    public int Montantcde { get; set; }
 
     public virtual Client NumcliNavigation { get; set; } = null!;
 

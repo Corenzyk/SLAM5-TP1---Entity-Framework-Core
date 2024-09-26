@@ -57,8 +57,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
             Commande uneCommande = new Commande();
             try
             {
-                uneCommande = monModel.Commandes.Include(c => c.Numparts).First(x =>
-               x.Numcde == idCommande);
+                uneCommande = monModel.Commandes.Include(c => c.Numparts).First(x => x.Numcde == idCommande);
             }
             catch (Exception ex)
             {
@@ -80,6 +79,28 @@ namespace SLAM5_TP1___Entity_Framework_Core
 
                 // ajout de l’objet : correspond à un insert
                 monModel.Commandes.Add(maCommande);
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+            }
+            return vretour;
+        }
+
+        public static bool ModifierCommande(int idCde, int montant, DateTime dateC, int idClient)
+        {
+            Commande maCommande;
+            bool vretour = true;
+            try
+            {
+                maCommande = RecupererCommande(idCde);
+
+                maCommande.Montantcde = montant; // mise à jour des propriétés
+                maCommande.Datecde = System.DateOnly.FromDateTime(dateC); // la propriété DateCde doit être en DateTime dans la BD et dans la classe Commande, modifier si besoin.
+                maCommande.Numcli = idClient;
+
+                // ajout de l’objet : correspond à un insert
                 monModel.SaveChanges();
             }
             catch (Exception ex)

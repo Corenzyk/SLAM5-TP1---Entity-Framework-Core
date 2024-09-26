@@ -4,19 +4,25 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore.Update;
+using SLAM5_TP1___Entity_Framework_Core.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SLAM5_TP1___Entity_Framework_Core
 {
     public partial class FormGestionCommandes : Form
     {
-        public FormGestionCommandes(int modifajout)
+        public FormGestionCommandes(int idCommande)
         {
             InitializeComponent();
+            label1.Text = "Ajout d'une commande";
+            label5.Visible = false;
+            label6.Visible = false;
             cbClients.SelectedIndex = -1;
             cbClients.ValueMember = "NUMCLI";
             cbClients.DisplayMember = "nomComplet"; // nomComplet est la concaténation du nom et prénom issu de la requête suivante
@@ -26,9 +32,16 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 nomComplet = x.Nomcli + " " + x.Prenomcli
             });
             cbClients.DataSource = bsClients3;
-            if (modifajout == 1)
+            if (idCommande != 0)
             {
-
+                label1.Text = "Modification d'une commande";
+                label5.Visible = true;
+                label6.Visible = true;
+                label6.Text = Convert.ToString(idCommande);
+                Commande cde = Modele.RecupererCommande(idCommande);
+                cbClients.SelectedIndex = cde.Numcli-1;
+                numMontant.Value = Convert.ToDecimal(cde.Montantcde);
+                //dtpDate.Value = Convert.ToDateTime(cde.Datecde);
             }
         }
 
@@ -54,16 +67,36 @@ namespace SLAM5_TP1___Entity_Framework_Core
             }
             else
             {
-                if (Modele.AjoutCommande(Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue)))
+                if (label1.Text == "Ajout d'une commande")
                 {
-                    MessageBox.Show("Enregistrement réussi");
-                    cbClients.SelectedIndex = -1;
-                    numMontant.Value = 0;
-                    dtpDate.Value = DateTime.Now;
+                    if (Modele.AjoutCommande(Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue)))
+                    {
+                        MessageBox.Show("Enregistrement réussi");
+                        cbClients.SelectedIndex = -1;
+                        numMontant.Value = 0;
+                        dtpDate.Value = DateTime.Now;
+                    }
+                    else
+                    {
+                        MessageBox.Show("L'enregistrement à échoué");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("L'enregistrement à échoué");
+                    if (Modele.ModifierCommande(Convert.ToInt32(label6.Text), Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue)))
+                    {
+                        MessageBox.Show("Enregistrement réussi");
+                        cbClients.SelectedIndex = -1;
+                        numMontant.Value = 0;
+                        dtpDate.Value = DateTime.Now;
+                        label1.Text = "Ajout d'une commande";
+                        label5.Visible = false;
+                        label6.Visible = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("L'enregistrement à échoué");
+                    }
                 }
             }
         }

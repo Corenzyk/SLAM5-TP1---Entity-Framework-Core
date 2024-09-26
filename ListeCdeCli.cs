@@ -54,7 +54,6 @@ namespace SLAM5_TP1___Entity_Framework_Core
         {
             // récupération de l’identifiant du client issu de la comboBox : on a NUMCLI en ValueMember de la
             // combo, donc on peut récupérer la valeur par la propriété SelectedValue
-            int IDC = Convert.ToInt32(cbClients.SelectedValue);
             int IdClient = Convert.ToInt32(cbClients.SelectedValue);
             bsCommandes.DataSource = Modele.listeCommandesParClient(IdClient).Select(x => new
             {
@@ -135,8 +134,10 @@ namespace SLAM5_TP1___Entity_Framework_Core
         private void btnModifier_Click(object sender, EventArgs e)
         {
             System.Type type = bsCommandes.Current.GetType();
-            int idCommande = (int)type.GetProperty("NUMCDE").GetValue(bsCommandes.Current, null);
-            
+            int idCommande = (int)type.GetProperty("Numcde").GetValue(bsCommandes.Current, null);
+            this.Hide();
+            FormGestionCommandes gestion = new FormGestionCommandes(idCommande);
+            gestion.Show();
         }
     }
 }

@@ -39,6 +39,8 @@
             label4 = new Label();
             bsClients3 = new BindingSource(components);
             btnAnnule = new Button();
+            label5 = new Label();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)numMontant).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
             SuspendLayout();
@@ -126,12 +128,35 @@
             btnAnnule.UseVisualStyleBackColor = true;
             btnAnnule.Click += btnAnnule_Click;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft Sans Serif", 11F);
+            label5.Location = new Point(130, 95);
+            label5.Name = "label5";
+            label5.Size = new Size(104, 18);
+            label5.TabIndex = 9;
+            label5.Text = "Commande n°";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
+            label6.Font = new Font("Microsoft Sans Serif", 11F);
+            label6.Location = new Point(228, 95);
+            label6.Name = "label6";
+            label6.Size = new Size(16, 18);
+            label6.TabIndex = 10;
+            label6.Text = "1";
+            // 
             // FormGestionCommandes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(384, 409);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(btnAnnule);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -161,5 +186,7 @@
         private Label label4;
         private BindingSource bsClients3;
         private Button btnAnnule;
+        private Label label5;
+        private Label label6;
     }
 }

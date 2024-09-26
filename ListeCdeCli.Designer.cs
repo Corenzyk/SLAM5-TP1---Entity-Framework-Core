@@ -104,17 +104,17 @@
             dgvPartition.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvPartition.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvPartition.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPartition.Location = new Point(468, 304);
+            dgvPartition.Location = new Point(468, 162);
             dgvPartition.Name = "dgvPartition";
-            dgvPartition.Size = new Size(347, 134);
+            dgvPartition.Size = new Size(347, 218);
             dgvPartition.TabIndex = 5;
             dgvPartition.Visible = false;
             // 
             // btnAjout
             // 
-            btnAjout.Location = new Point(655, 12);
+            btnAjout.Location = new Point(468, 386);
             btnAjout.Name = "btnAjout";
-            btnAjout.Size = new Size(160, 23);
+            btnAjout.Size = new Size(347, 23);
             btnAjout.TabIndex = 6;
             btnAjout.Text = "Ajouter une commande";
             btnAjout.UseVisualStyleBackColor = true;
@@ -135,9 +135,9 @@
             // 
             // btnModifier
             // 
-            btnModifier.Location = new Point(655, 41);
+            btnModifier.Location = new Point(468, 415);
             btnModifier.Name = "btnModifier";
-            btnModifier.Size = new Size(160, 23);
+            btnModifier.Size = new Size(347, 23);
             btnModifier.TabIndex = 8;
             btnModifier.Text = "Modifier une commande";
             btnModifier.UseVisualStyleBackColor = true;
