@@ -227,5 +227,17 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 dgvAffichage.DataSource = bsLivreur2;
             }
         }
+
+        /*
+         * Mission 1 :
+         * Dans l'affichage des commandes :
+         * - ajout de la colonne du moyen de livraison (si aucun, valeur par défaut "retrait en magasin")
+         * 
+         * Mission 3 :
+         * Ajout d'un bouton permettant de faire apparaitre les modes de livraison sur la dgv de droite
+         * Quand la DGV de droite affiche les modes de livraisons, affiché un bouton "Supprimer le mode de livraison"
+         * Le bouton demandera la confirmation pour supprimer le mode de livraison selectionné, affichera aucun mode selectionné sinon
+         * Si le mode de livraison est supprimé, recharger la BS
+         */
     }
 }
