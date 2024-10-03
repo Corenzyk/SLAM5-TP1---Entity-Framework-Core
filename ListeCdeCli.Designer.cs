@@ -105,9 +105,9 @@
             dgvPartition.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvPartition.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvPartition.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPartition.Location = new Point(468, 133);
+            dgvPartition.Location = new Point(468, 12);
             dgvPartition.Name = "dgvPartition";
-            dgvPartition.Size = new Size(347, 218);
+            dgvPartition.Size = new Size(347, 339);
             dgvPartition.TabIndex = 5;
             dgvPartition.Visible = false;
             // 

@@ -29,6 +29,11 @@ namespace SLAM5_TP1___Entity_Framework_Core
             return monModel.Commandes.Include(a => a.NumcliNavigation).ToList();
         }
 
+        public static List<Partition> listePartitions()
+        {
+            return monModel.Partitions.ToList();
+        }
+
         public static List<Partition> listePartitionsParCommandes(int idC)
         {
             Commande c = Modele.monModel.Commandes.Include(p => p.Numparts).ThenInclude(p => p.NumstyleNavigation).First(x => x.Numcde == idC);
@@ -65,6 +70,15 @@ namespace SLAM5_TP1___Entity_Framework_Core
             }
             return uneCommande;
         }
+
+        public static ICollection<Partition> listePartitionsParCommande(int idC)
+        {
+            Commande maCommande = RecupererCommande(idC);
+            ICollection<Partition> part = new List<Partition>();
+            part = maCommande.Numparts;
+            return part;
+        }
+
 
         public static bool AjoutCommande(int montant, DateTime dateC, int idClient)
         {

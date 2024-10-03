@@ -32,6 +32,11 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 nomComplet = x.Nomcli + " " + x.Prenomcli
             });
             cbClients.DataSource = bsClients3;
+            List<Partition> lesP = new(Modele.listePartitions());
+            foreach (Partition P in lesP)
+            {
+                checkLPartitions.Items.Add(P.Libpart);
+            }
             if (idCommande != 0)
             {
                 label1.Text = "Modification d'une commande";
@@ -75,6 +80,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
                         cbClients.SelectedIndex = -1;
                         numMontant.Value = 0;
                         dtpDate.Value = DateTime.Now;
+                        checkLPartitions.SelectedItems.Clear();
                     }
                 }
                 else
@@ -88,6 +94,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
                         label1.Text = "Ajout d'une commande";
                         label5.Visible = false;
                         label6.Visible = false;
+                        checkLPartitions.SelectedItems.Clear();
                     }
                 }
             }
