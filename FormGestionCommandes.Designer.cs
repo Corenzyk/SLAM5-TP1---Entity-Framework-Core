@@ -43,6 +43,7 @@
             label6 = new Label();
             checkLPartitions = new CheckedListBox();
             bsPartitions = new BindingSource(components);
+            mySqlCommand1 = new MySqlConnector.MySqlCommand();
             ((System.ComponentModel.ISupportInitialize)numMontant).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsPartitions).BeginInit();
@@ -73,7 +74,7 @@
             // 
             // btnValide
             // 
-            btnValide.Location = new Point(28, 368);
+            btnValide.Location = new Point(28, 523);
             btnValide.Name = "btnValide";
             btnValide.Size = new Size(75, 23);
             btnValide.TabIndex = 3;
@@ -123,7 +124,7 @@
             // 
             // btnAnnule
             // 
-            btnAnnule.Location = new Point(187, 368);
+            btnAnnule.Location = new Point(187, 523);
             btnAnnule.Name = "btnAnnule";
             btnAnnule.Size = new Size(75, 23);
             btnAnnule.TabIndex = 8;
@@ -161,12 +162,19 @@
             checkLPartitions.Size = new Size(270, 148);
             checkLPartitions.TabIndex = 11;
             // 
+            // mySqlCommand1
+            // 
+            mySqlCommand1.CommandTimeout = 0;
+            mySqlCommand1.Connection = null;
+            mySqlCommand1.Transaction = null;
+            mySqlCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
+            // 
             // FormGestionCommandes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(294, 403);
+            ClientSize = new Size(294, 558);
             Controls.Add(checkLPartitions);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -204,5 +212,6 @@
         private Label label6;
         private CheckedListBox checkLPartitions;
         private BindingSource bsPartitions;
+        private MySqlConnector.MySqlCommand mySqlCommand1;
     }
 }

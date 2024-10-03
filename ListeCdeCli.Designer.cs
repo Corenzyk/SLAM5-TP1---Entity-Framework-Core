@@ -42,6 +42,8 @@
             dgvClients = new DataGridView();
             btnModifier = new Button();
             btnSuppr = new Button();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -60,7 +62,7 @@
             dgvCommandes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvCommandes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvCommandes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCommandes.Location = new Point(12, 70);
+            dgvCommandes.Location = new Point(12, 123);
             dgvCommandes.Name = "dgvCommandes";
             dgvCommandes.Size = new Size(450, 368);
             dgvCommandes.TabIndex = 1;
@@ -70,9 +72,9 @@
             // 
             cbClients.DropDownStyle = ComboBoxStyle.DropDownList;
             cbClients.FormattingEnabled = true;
-            cbClients.Location = new Point(12, 12);
+            cbClients.Location = new Point(12, 50);
             cbClients.Name = "cbClients";
-            cbClients.Size = new Size(450, 23);
+            cbClients.Size = new Size(212, 23);
             cbClients.TabIndex = 2;
             // 
             // bsClients2
@@ -81,7 +83,7 @@
             // 
             // numMontant
             // 
-            numMontant.Location = new Point(12, 41);
+            numMontant.Location = new Point(12, 94);
             numMontant.Name = "numMontant";
             numMontant.Size = new Size(212, 23);
             numMontant.TabIndex = 3;
@@ -89,11 +91,11 @@
             // 
             // btnReset
             // 
-            btnReset.Location = new Point(387, 41);
+            btnReset.Location = new Point(338, 92);
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(75, 23);
+            btnReset.Size = new Size(124, 23);
             btnReset.TabIndex = 4;
-            btnReset.Text = "Reinitialiser";
+            btnReset.Text = "Reinitialiser les filtres";
             btnReset.UseVisualStyleBackColor = true;
             btnReset.Click += btnReset_Click;
             // 
@@ -105,15 +107,15 @@
             dgvPartition.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvPartition.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvPartition.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPartition.Location = new Point(468, 12);
+            dgvPartition.Location = new Point(468, 123);
             dgvPartition.Name = "dgvPartition";
-            dgvPartition.Size = new Size(347, 339);
+            dgvPartition.Size = new Size(347, 281);
             dgvPartition.TabIndex = 5;
             dgvPartition.Visible = false;
             // 
             // btnAjout
             // 
-            btnAjout.Location = new Point(468, 357);
+            btnAjout.Location = new Point(468, 410);
             btnAjout.Name = "btnAjout";
             btnAjout.Size = new Size(347, 23);
             btnAjout.TabIndex = 6;
@@ -131,12 +133,12 @@
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClients.Location = new Point(821, 12);
             dgvClients.Name = "dgvClients";
-            dgvClients.Size = new Size(532, 426);
+            dgvClients.Size = new Size(532, 450);
             dgvClients.TabIndex = 7;
             // 
             // btnModifier
             // 
-            btnModifier.Location = new Point(468, 386);
+            btnModifier.Location = new Point(468, 439);
             btnModifier.Name = "btnModifier";
             btnModifier.Size = new Size(347, 23);
             btnModifier.TabIndex = 8;
@@ -146,7 +148,7 @@
             // 
             // btnSuppr
             // 
-            btnSuppr.Location = new Point(468, 415);
+            btnSuppr.Location = new Point(468, 468);
             btnSuppr.Name = "btnSuppr";
             btnSuppr.Size = new Size(347, 23);
             btnSuppr.TabIndex = 9;
@@ -154,11 +156,31 @@
             btnSuppr.UseVisualStyleBackColor = true;
             btnSuppr.Click += btnSuppr_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 76);
+            label1.Name = "label1";
+            label1.Size = new Size(151, 15);
+            label1.TabIndex = 10;
+            label1.Text = "Montant de la commande :";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 32);
+            label2.Name = "label2";
+            label2.Size = new Size(136, 15);
+            label2.TabIndex = 11;
+            label2.Text = "Client de la commande :";
+            // 
             // ListeCdeCli
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1365, 450);
+            ClientSize = new Size(1365, 503);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(btnSuppr);
             Controls.Add(btnModifier);
             Controls.Add(dgvClients);
@@ -181,6 +203,7 @@
             ((System.ComponentModel.ISupportInitialize)bsClients).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -198,5 +221,7 @@
         private DataGridView dgvClients;
         private Button btnModifier;
         private Button btnSuppr;
+        private Label label1;
+        private Label label2;
     }
 }

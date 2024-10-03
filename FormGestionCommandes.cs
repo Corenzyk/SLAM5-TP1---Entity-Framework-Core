@@ -46,7 +46,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 Commande cde = Modele.RecupererCommande(idCommande);
                 cbClients.SelectedIndex = cde.Numcli-1;
                 numMontant.Value = Convert.ToDecimal(cde.Montantcde);
-                //dtpDate.Value = Convert.ToDateTime(cde.Datecde);
+                dtpDate.Value = Convert.ToDateTime(cde.Datecde);
             }
         }
 
