@@ -16,7 +16,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
         public ListeCdeCli()
         {
             InitializeComponent();
-            cbClients.SelectedIndex = -1;
+
             cbClients.ValueMember = "NUMCLI";
             cbClients.DisplayMember = "nomComplet"; // nomComplet est la concaténation du nom et prénom issu de la requête suivante
             bsClients2.DataSource = (Modele.listeClients()).Select(x => new
@@ -25,7 +25,45 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 nomComplet = x.Nomcli + " " + x.Prenomcli
             });
             cbClients.DataSource = bsClients2;
+            cbClients.SelectedIndex = -1;
 
+            cbLivreur.ValueMember = "idMoyen";
+            cbLivreur.DisplayMember = "nomMoyen";
+            bsLivreur.DataSource = (Modele.listeLivreur()).Select(x => new
+            {
+                x.IdMoyen,
+                x.NomMoyen
+            });
+            cbLivreur.DataSource = bsLivreur;
+            cbLivreur.SelectedIndex = -1;
+
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("idAffichage", typeof(int));
+            dt.Columns.Add("nomAffichage");
+
+            DataRow dr1 = dt.NewRow();
+            dr1["nomAffichage"] = "Clients";
+            dr1["idAffichage"] = 0;
+            DataRow dr2 = dt.NewRow();
+            dr2["nomAffichage"] = "Partitions";
+            dr2["idAffichage"] = 1;
+            DataRow dr3 = dt.NewRow();
+            dr3["nomAffichage"] = "Styles";
+            dr3["idAffichage"] = 2;
+            DataRow dr4 = dt.NewRow();
+            dr4["nomAffichage"] = "Livreurs";
+            dr4["idAffichage"] = 3;
+
+            dt.Rows.InsertAt(dr1, 0);
+            dt.Rows.InsertAt(dr2, 1);
+            dt.Rows.InsertAt(dr3, 2);
+            dt.Rows.InsertAt(dr4, 3);
+
+            cbAffichageDGV.DisplayMember = "nomAffichage";
+            cbAffichageDGV.ValueMember = "idAffichage";
+            cbAffichageDGV.DataSource = dt;
+            cbAffichageDGV.SelectedIndex = -1;
         }
 
         private void ListeCde_Load(object sender, EventArgs e)
@@ -36,18 +74,11 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.Montantcde,
                 x.Datecde,
                 x.NumcliNavigation.Nomcli,
-                x.NumcliNavigation.Prenomcli
+                x.NumcliNavigation.Prenomcli,
+                //x.IdMoyenNavigation.NomMoyen,
+                //x.IdMoyenNavigation.DescMoyen
             });  // appel de la méthode listeClients
             dgvCommandes.DataSource = bsCommandes;
-            bsClients.DataSource = Modele.listeClients().Select(x => new
-            {
-                x.Numcli,
-                x.Nomcli,
-                x.Prenomcli,
-                x.Adrcli,
-                x.Tel
-            }); // appel de la méthode listeClients
-            dgvClients.DataSource = bsClients;
         }
 
         private void bsClients2_CurrentChanged_1(object sender, EventArgs e)
@@ -61,7 +92,9 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.Datecde,
                 x.Montantcde,
                 x.NumcliNavigation.Nomcli,
-                x.NumcliNavigation.Prenomcli
+                x.NumcliNavigation.Prenomcli,
+                //x.IdMoyenNavigation.NomMoyen,
+                //x.IdMoyenNavigation.DescMoyen
             }).OrderBy(x => x.Datecde);
             dgvCommandes.DataSource = bsCommandes;
         }
@@ -75,7 +108,9 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.Datecde,
                 x.Montantcde,
                 x.NumcliNavigation.Nomcli,
-                x.NumcliNavigation.Prenomcli
+                x.NumcliNavigation.Prenomcli,
+                //x.IdMoyenNavigation.NomMoyen,
+                //x.IdMoyenNavigation.DescMoyen
             }).OrderBy(x => x.Montantcde);
             dgvCommandes.DataSource = bsCommandes;
         }
@@ -88,7 +123,9 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 x.Montantcde,
                 x.Datecde,
                 x.NumcliNavigation.Nomcli,
-                x.NumcliNavigation.Prenomcli
+                x.NumcliNavigation.Prenomcli,
+                //x.IdMoyenNavigation.NomMoyen,
+                //x.IdMoyenNavigation.DescMoyen
             });
             dgvCommandes.DataSource = bsCommandes;
             numMontant.Value = 0;
@@ -153,9 +190,41 @@ namespace SLAM5_TP1___Entity_Framework_Core
                     x.Montantcde,
                     x.Datecde,
                     x.NumcliNavigation.Nomcli,
-                    x.NumcliNavigation.Prenomcli
+                    x.NumcliNavigation.Prenomcli,
+                    //x.IdMoyenNavigation.NomMoyen,
+                    //x.IdMoyenNavigation.DescMoyen
                 });
                 dgvCommandes.DataSource = bsCommandes;
+            }
+        }
+
+        private void bsLivreur_CurrentChanged(object sender, EventArgs e)
+        {
+            int idLivreur = Convert.ToInt32(cbLivreur.SelectedValue);
+            bsCommandes.DataSource = Modele.listeCommandesParLivreur(idLivreur).Select(x => new
+            {
+                x.Numcde,
+                x.Datecde,
+                x.Montantcde,
+                x.NumcliNavigation.Nomcli,
+                x.NumcliNavigation.Prenomcli,
+                //x.IdMoyenNavigation.NomMoyen,
+                //x.IdMoyenNavigation.DescMoyen
+            });
+            dgvCommandes.DataSource = bsCommandes;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbAffichageDGV.SelectedIndex == 3)
+            {
+                bsLivreur2.DataSource = Modele.listeLivreur().Select(x => new
+                {
+                    x.IdMoyen,
+                    x.NomMoyen,
+                    x.DescMoyen
+                });
+                dgvAffichage.DataSource = bsLivreur2;
             }
         }
     }

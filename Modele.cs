@@ -24,9 +24,14 @@ namespace SLAM5_TP1___Entity_Framework_Core
             return monModel.Clients.ToList();
         }
 
+        public static List<MoyenLivraison> listeLivreur()
+        {
+            return monModel.MoyenLivraisons.ToList();
+        }
+
         public static List<Commande> listeCommandes()
         {
-            return monModel.Commandes.Include(a => a.NumcliNavigation).ToList();
+            return monModel.Commandes.Include(a => a.NumcliNavigation).Include(a => a.IdMoyenNavigation).ToList();
         }
 
         public static List<Partition> listePartitions()
@@ -46,14 +51,21 @@ namespace SLAM5_TP1___Entity_Framework_Core
         public static List<Commande> listeCommandesParClient(int idClient)
         {
             List<Commande> lesCommandes = monModel.Commandes.Where(p => p.Numcli ==
-           idClient).Include(p => p.NumcliNavigation).ToList();
+           idClient).Include(p => p.NumcliNavigation).Include(b => b.IdMoyenNavigation).ToList();
+            return lesCommandes;
+        }
+
+        public static List<Commande> listeCommandesParLivreur(int idLivreur)
+        {
+            List<Commande> lesCommandes = monModel.Commandes.Where(p => p.IdMoyen ==
+           idLivreur).Include(p => p.IdMoyenNavigation).Include(p => p.NumcliNavigation).ToList();
             return lesCommandes;
         }
 
         public static List<Commande> listeCommandesParMontant(int montant)
         {
             List<Commande> lesCommandes = monModel.Commandes.Where(p => p.Montantcde >=
-           montant).Include(p => p.NumcliNavigation).ToList();
+           montant).Include(p => p.NumcliNavigation).Include(b => b.IdMoyenNavigation).ToList();
             return lesCommandes;
         }
 
@@ -80,7 +92,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
         }
 
 
-        public static bool AjoutCommande(int montant, DateTime dateC, int idClient)
+        public static bool AjoutCommande(int montant, DateTime dateC, int idClient, int idLivreur)
         {
             Commande maCommande;
             bool vretour = true;
@@ -90,6 +102,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 maCommande.Montantcde = montant; // mise à jour des propriétés
                 maCommande.Datecde = System.DateOnly.FromDateTime(dateC); // la propriété DateCde doit être en DateTime dans la BD et dans la classe Commande, modifier si besoin.
                 maCommande.Numcli = idClient;
+                maCommande.IdMoyen = idLivreur;
 
                 // ajout de l’objet : correspond à un insert
                 monModel.Commandes.Add(maCommande);
@@ -103,7 +116,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
             return vretour;
         }
 
-        public static bool ModifierCommande(int idCde, int montant, DateTime dateC, int idClient)
+        public static bool ModifierCommande(int idCde, int montant, DateTime dateC, int idClient, int idLivreur)
         {
             Commande maCommande;
             bool vretour = true;
@@ -114,6 +127,7 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 maCommande.Montantcde = montant; // mise à jour des propriétés
                 maCommande.Datecde = System.DateOnly.FromDateTime(dateC); // la propriété DateCde doit être en DateTime dans la BD et dans la classe Commande, modifier si besoin.
                 maCommande.Numcli = idClient;
+                maCommande.IdMoyen = idLivreur;
 
                 // ajout de l’objet : correspond à un insert
                 monModel.SaveChanges();

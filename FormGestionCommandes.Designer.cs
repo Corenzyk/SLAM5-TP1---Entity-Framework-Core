@@ -44,9 +44,14 @@
             checkLPartitions = new CheckedListBox();
             bsPartitions = new BindingSource(components);
             mySqlCommand1 = new MySqlConnector.MySqlCommand();
+            BSMoyenCommande = new BindingSource(components);
+            checkLivreur = new CheckBox();
+            label7 = new Label();
+            cbLivreur = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)numMontant).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsPartitions).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)BSMoyenCommande).BeginInit();
             SuspendLayout();
             // 
             // numMontant
@@ -74,7 +79,7 @@
             // 
             // btnValide
             // 
-            btnValide.Location = new Point(28, 523);
+            btnValide.Location = new Point(28, 437);
             btnValide.Name = "btnValide";
             btnValide.Size = new Size(75, 23);
             btnValide.TabIndex = 3;
@@ -124,7 +129,7 @@
             // 
             // btnAnnule
             // 
-            btnAnnule.Location = new Point(187, 523);
+            btnAnnule.Location = new Point(187, 437);
             btnAnnule.Name = "btnAnnule";
             btnAnnule.Size = new Size(75, 23);
             btnAnnule.TabIndex = 8;
@@ -157,7 +162,7 @@
             // 
             checkLPartitions.BackColor = SystemColors.Control;
             checkLPartitions.FormattingEnabled = true;
-            checkLPartitions.Location = new Point(12, 216);
+            checkLPartitions.Location = new Point(12, 229);
             checkLPartitions.Name = "checkLPartitions";
             checkLPartitions.Size = new Size(270, 148);
             checkLPartitions.TabIndex = 11;
@@ -169,12 +174,45 @@
             mySqlCommand1.Transaction = null;
             mySqlCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
+            // checkLivreur
+            // 
+            checkLivreur.AutoSize = true;
+            checkLivreur.Location = new Point(96, 383);
+            checkLivreur.Name = "checkLivreur";
+            checkLivreur.Size = new Size(101, 19);
+            checkLivreur.TabIndex = 12;
+            checkLivreur.Text = "Se faire livrer ?";
+            checkLivreur.UseVisualStyleBackColor = true;
+            checkLivreur.CheckedChanged += checkLivreur_CheckedChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Microsoft Sans Serif", 8.25F);
+            label7.Location = new Point(12, 213);
+            label7.Name = "label7";
+            label7.Size = new Size(56, 13);
+            label7.TabIndex = 13;
+            label7.Text = "Partitions :";
+            // 
+            // cbLivreur
+            // 
+            cbLivreur.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbLivreur.FormattingEnabled = true;
+            cbLivreur.Location = new Point(12, 408);
+            cbLivreur.Name = "cbLivreur";
+            cbLivreur.Size = new Size(270, 23);
+            cbLivreur.TabIndex = 14;
+            // 
             // FormGestionCommandes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(294, 558);
+            ClientSize = new Size(294, 470);
+            Controls.Add(cbLivreur);
+            Controls.Add(label7);
+            Controls.Add(checkLivreur);
             Controls.Add(checkLPartitions);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -192,6 +230,7 @@
             ((System.ComponentModel.ISupportInitialize)numMontant).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsClients3).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsPartitions).EndInit();
+            ((System.ComponentModel.ISupportInitialize)BSMoyenCommande).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -213,5 +252,9 @@
         private CheckedListBox checkLPartitions;
         private BindingSource bsPartitions;
         private MySqlConnector.MySqlCommand mySqlCommand1;
+        private BindingSource BSMoyenCommande;
+        private CheckBox checkLivreur;
+        private Label label7;
+        private ComboBox cbLivreur;
     }
 }

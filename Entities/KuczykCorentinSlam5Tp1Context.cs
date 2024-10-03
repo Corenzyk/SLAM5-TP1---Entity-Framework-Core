@@ -22,6 +22,8 @@ public partial class KuczykCorentinSlam5Tp1Context : DbContext
 
     public virtual DbSet<Commande> Commandes { get; set; }
 
+    public virtual DbSet<MoyenLivraison> MoyenLivraisons { get; set; }
+
     public virtual DbSet<Partition> Partitions { get; set; }
 
     public virtual DbSet<Style> Styles { get; set; }
@@ -79,12 +81,20 @@ public partial class KuczykCorentinSlam5Tp1Context : DbContext
 
             entity.ToTable("commande");
 
+            entity.HasIndex(e => e.IdMoyen, "FK_COMMANDE_MOYEN_LIVRAISON");
+
             entity.HasIndex(e => e.Numcli, "I_FK_COMMANDE_ADHERENT");
 
             entity.Property(e => e.Numcde).HasColumnName("NUMCDE");
             entity.Property(e => e.Datecde).HasColumnName("DATECDE");
+            entity.Property(e => e.IdMoyen).HasColumnName("idMoyen");
             entity.Property(e => e.Montantcde).HasColumnName("MONTANTCDE");
             entity.Property(e => e.Numcli).HasColumnName("NUMCLI");
+
+            entity.HasOne(d => d.IdMoyenNavigation).WithMany(p => p.Commandes)
+                .HasForeignKey(d => d.IdMoyen)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_COMMANDE_MOYEN_LIVRAISON");
 
             entity.HasOne(d => d.NumcliNavigation).WithMany(p => p.Commandes)
                 .HasForeignKey(d => d.Numcli)
@@ -112,6 +122,21 @@ public partial class KuczykCorentinSlam5Tp1Context : DbContext
                         j.IndexerProperty<int>("Numcde").HasColumnName("NUMCDE");
                         j.IndexerProperty<int>("Numpart").HasColumnName("NUMPART");
                     });
+        });
+
+        modelBuilder.Entity<MoyenLivraison>(entity =>
+        {
+            entity.HasKey(e => e.IdMoyen).HasName("PRIMARY");
+
+            entity.ToTable("moyen_livraison");
+
+            entity.Property(e => e.IdMoyen).HasColumnName("idMoyen");
+            entity.Property(e => e.DescMoyen)
+                .HasMaxLength(250)
+                .HasColumnName("descMoyen");
+            entity.Property(e => e.NomMoyen)
+                .HasMaxLength(50)
+                .HasColumnName("nomMoyen");
         });
 
         modelBuilder.Entity<Partition>(entity =>

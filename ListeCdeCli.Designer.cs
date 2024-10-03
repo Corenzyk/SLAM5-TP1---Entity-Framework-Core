@@ -39,11 +39,16 @@
             bsPartitions2 = new BindingSource(components);
             btnAjout = new Button();
             bsClients = new BindingSource(components);
-            dgvClients = new DataGridView();
+            dgvAffichage = new DataGridView();
             btnModifier = new Button();
             btnSuppr = new Button();
             label1 = new Label();
             label2 = new Label();
+            label3 = new Label();
+            cbLivreur = new ComboBox();
+            bsLivreur = new BindingSource(components);
+            cbAffichageDGV = new ComboBox();
+            bsLivreur2 = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -51,7 +56,9 @@
             ((System.ComponentModel.ISupportInitialize)dgvPartition).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsPartitions2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAffichage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsLivreur).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsLivreur2).BeginInit();
             SuspendLayout();
             // 
             // dgvCommandes
@@ -123,18 +130,18 @@
             btnAjout.UseVisualStyleBackColor = true;
             btnAjout.Click += btnAjout_Click;
             // 
-            // dgvClients
+            // dgvAffichage
             // 
-            dgvClients.AllowUserToAddRows = false;
-            dgvClients.AllowUserToDeleteRows = false;
-            dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgvClients.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dgvClients.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClients.Location = new Point(821, 12);
-            dgvClients.Name = "dgvClients";
-            dgvClients.Size = new Size(532, 450);
-            dgvClients.TabIndex = 7;
+            dgvAffichage.AllowUserToAddRows = false;
+            dgvAffichage.AllowUserToDeleteRows = false;
+            dgvAffichage.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvAffichage.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvAffichage.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvAffichage.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAffichage.Location = new Point(821, 12);
+            dgvAffichage.Name = "dgvAffichage";
+            dgvAffichage.Size = new Size(532, 450);
+            dgvAffichage.TabIndex = 7;
             // 
             // btnModifier
             // 
@@ -174,16 +181,51 @@
             label2.TabIndex = 11;
             label2.Text = "Client de la commande :";
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(700, 14);
+            label3.Name = "label3";
+            label3.Size = new Size(115, 15);
+            label3.TabIndex = 13;
+            label3.Text = "Affichage de la DGV:";
+            // 
+            // cbLivreur
+            // 
+            cbLivreur.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbLivreur.FormattingEnabled = true;
+            cbLivreur.Location = new Point(230, 50);
+            cbLivreur.Name = "cbLivreur";
+            cbLivreur.Size = new Size(232, 23);
+            cbLivreur.TabIndex = 12;
+            // 
+            // bsLivreur
+            // 
+            bsLivreur.CurrentChanged += bsLivreur_CurrentChanged;
+            // 
+            // cbAffichageDGV
+            // 
+            cbAffichageDGV.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbAffichageDGV.FormattingEnabled = true;
+            cbAffichageDGV.Location = new Point(655, 32);
+            cbAffichageDGV.Name = "cbAffichageDGV";
+            cbAffichageDGV.Size = new Size(160, 23);
+            cbAffichageDGV.TabIndex = 14;
+            cbAffichageDGV.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
             // ListeCdeCli
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1365, 503);
+            Controls.Add(cbAffichageDGV);
+            Controls.Add(label3);
+            Controls.Add(cbLivreur);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnSuppr);
             Controls.Add(btnModifier);
-            Controls.Add(dgvClients);
+            Controls.Add(dgvAffichage);
             Controls.Add(btnAjout);
             Controls.Add(dgvPartition);
             Controls.Add(btnReset);
@@ -201,7 +243,9 @@
             ((System.ComponentModel.ISupportInitialize)dgvPartition).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsPartitions2).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsClients).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAffichage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsLivreur).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsLivreur2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -218,10 +262,15 @@
         private BindingSource bsPartitions2;
         private Button btnAjout;
         private BindingSource bsClients;
-        private DataGridView dgvClients;
+        private DataGridView dgvAffichage;
         private Button btnModifier;
         private Button btnSuppr;
         private Label label1;
         private Label label2;
+        private Label label3;
+        private ComboBox cbLivreur;
+        private BindingSource bsLivreur;
+        private ComboBox cbAffichageDGV;
+        private BindingSource bsLivreur2;
     }
 }

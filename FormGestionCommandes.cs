@@ -23,7 +23,11 @@ namespace SLAM5_TP1___Entity_Framework_Core
             label1.Text = "Ajout d'une commande";
             label5.Visible = false;
             label6.Visible = false;
-            cbClients.SelectedIndex = -1;
+            checkLivreur.Checked = false;
+            this.Size = new System.Drawing.Size(310, 481);
+            btnValide.Location = new Point(28, 408);
+            btnAnnule.Location = new Point(187, 408);
+            cbLivreur.Visible = false;
             cbClients.ValueMember = "NUMCLI";
             cbClients.DisplayMember = "nomComplet"; // nomComplet est la concaténation du nom et prénom issu de la requête suivante
             bsClients3.DataSource = (Modele.listeClients()).Select(x => new
@@ -32,6 +36,16 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 nomComplet = x.Nomcli + " " + x.Prenomcli
             });
             cbClients.DataSource = bsClients3;
+            cbClients.SelectedIndex = -1;
+            cbLivreur.ValueMember = "idMoyen";
+            cbLivreur.DisplayMember = "nomMoyen";
+            BSMoyenCommande.DataSource = (Modele.listeLivreur()).Select(l => new
+            {
+                l.IdMoyen,
+                l.NomMoyen
+            });
+            cbLivreur.DataSource = BSMoyenCommande;
+            cbLivreur.SelectedIndex = -1;
             List<Partition> lesP = new(Modele.listePartitions());
             foreach (Partition P in lesP)
             {
@@ -44,17 +58,26 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 label6.Visible = true;
                 label6.Text = Convert.ToString(idCommande);
                 Commande cde = Modele.RecupererCommande(idCommande);
-                cbClients.SelectedIndex = cde.Numcli-1;
+                cbClients.SelectedIndex = cde.Numcli - 1;
                 numMontant.Value = Convert.ToDecimal(cde.Montantcde);
-                dtpDate.Value = Convert.ToDateTime(cde.Datecde);
+                //dtpDate.Value = Convert.ToDateTime(cde.Datecde);
+                if (cde.IdMoyen != null)
+                {
+                    checkLivreur.Checked = true;
+                    this.Size = new System.Drawing.Size(310, 509);
+                    btnValide.Location = new Point(28, 437);
+                    btnAnnule.Location = new Point(187, 437);
+                    cbLivreur.Visible = true;
+                    cbLivreur.SelectedIndex = Convert.ToInt32(cde.IdMoyen) - 1;
+                }
             }
         }
 
         private void btnValide_Click(object sender, EventArgs e)
         {
             DateTime check;
-            string message="";
-            if (cbClients.SelectedIndex == -1 || numMontant.Value <= 0 || (DateTime.TryParse(dtpDate.Text, out check) && check > DateTime.Now))
+            string message = "";
+            if (cbClients.SelectedIndex == -1 || (cbLivreur.SelectedIndex==-1 && checkLivreur.Checked==true) || numMontant.Value <= 0 || (DateTime.TryParse(dtpDate.Text, out check) && check > DateTime.Now))
             {
                 if (cbClients.SelectedIndex == -1)
                 {
@@ -68,16 +91,26 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 {
                     message += "\n La date ne convient pas (dans le futur)";
                 }
-                MessageBox.Show("Des erreurs ont été detecté :"+message);
+                if (cbLivreur.SelectedIndex == -1 && checkLivreur.Checked == true)
+                {
+                    message += "\n Le livreur n'est pas renseigné ou alors vous avez coché par mégarde la case livraison";
+                }
+                MessageBox.Show("Des erreurs ont été detecté :" + message);
             }
             else
             {
                 if (label1.Text == "Ajout d'une commande")
                 {
-                    if (Modele.AjoutCommande(Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue)))
+                    if (Modele.AjoutCommande(Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue), Convert.ToInt32(cbLivreur.SelectedValue)))
                     {
                         MessageBox.Show("Enregistrement réussi");
                         cbClients.SelectedIndex = -1;
+                        cbLivreur.SelectedIndex = -1;
+                        checkLivreur.Checked = false;
+                        this.Size = new System.Drawing.Size(310, 481);
+                        btnValide.Location = new Point(28, 408);
+                        btnAnnule.Location = new Point(187, 408);
+                        cbLivreur.Visible = false;
                         numMontant.Value = 0;
                         dtpDate.Value = DateTime.Now;
                         checkLPartitions.SelectedItems.Clear();
@@ -85,10 +118,16 @@ namespace SLAM5_TP1___Entity_Framework_Core
                 }
                 else
                 {
-                    if (Modele.ModifierCommande(Convert.ToInt32(label6.Text), Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue)))
+                    if (Modele.ModifierCommande(Convert.ToInt32(label6.Text), Convert.ToInt32(numMontant.Value), dtpDate.Value, Convert.ToInt32(cbClients.SelectedValue), Convert.ToInt32(cbLivreur.SelectedValue)))
                     {
                         MessageBox.Show("Enregistrement réussi");
                         cbClients.SelectedIndex = -1;
+                        cbLivreur.SelectedIndex = -1;
+                        checkLivreur.Checked = false;
+                        this.Size = new System.Drawing.Size(310, 481);
+                        btnValide.Location = new Point(28, 408);
+                        btnAnnule.Location = new Point(187, 408);
+                        cbLivreur.Visible = false;
                         numMontant.Value = 0;
                         dtpDate.Value = DateTime.Now;
                         label1.Text = "Ajout d'une commande";
@@ -105,6 +144,24 @@ namespace SLAM5_TP1___Entity_Framework_Core
             this.Hide();
             ListeCdeCli commande = new ListeCdeCli();
             commande.Show();
+        }
+
+        private void checkLivreur_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkLivreur.Checked)
+            {
+                this.Size = new System.Drawing.Size(310, 509);
+                btnValide.Location = new Point(28, 437);
+                btnAnnule.Location = new Point(187, 437);
+                cbLivreur.Visible = true;
+            }
+            else
+            {
+                this.Size = new System.Drawing.Size(310, 481);
+                btnValide.Location = new Point(28, 408);
+                btnAnnule.Location = new Point(187, 408);
+                cbLivreur.Visible = false;
+            }
         }
     }
 }
