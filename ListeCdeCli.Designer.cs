@@ -49,6 +49,8 @@
             bsLivreur = new BindingSource(components);
             cbAffichageDGV = new ComboBox();
             bsLivreur2 = new BindingSource(components);
+            bsStyle = new BindingSource(components);
+            bsClients3 = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -59,6 +61,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvAffichage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsLivreur).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsLivreur2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsStyle).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
             SuspendLayout();
             // 
             // dgvCommandes
@@ -246,6 +250,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvAffichage).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsLivreur).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsLivreur2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsStyle).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsClients3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -272,5 +278,7 @@
         private BindingSource bsLivreur;
         private ComboBox cbAffichageDGV;
         private BindingSource bsLivreur2;
+        private BindingSource bsStyle;
+        private BindingSource bsClients3;
     }
 }

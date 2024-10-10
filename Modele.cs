@@ -38,6 +38,10 @@ namespace SLAM5_TP1___Entity_Framework_Core
         {
             return monModel.Partitions.ToList();
         }
+        public static List<Style> listeStyle()
+        {
+            return monModel.Styles.ToList();
+        }
 
         public static List<Partition> listePartitionsParCommandes(int idC)
         {

@@ -64,6 +64,8 @@ namespace SLAM5_TP1___Entity_Framework_Core
             cbAffichageDGV.ValueMember = "idAffichage";
             cbAffichageDGV.DataSource = dt;
             cbAffichageDGV.SelectedIndex = -1;
+
+            dgvAffichage.DataSource = null;
         }
 
         private void ListeCde_Load(object sender, EventArgs e)
@@ -216,6 +218,37 @@ namespace SLAM5_TP1___Entity_Framework_Core
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbAffichageDGV.SelectedIndex == 0)
+            {
+                bsClients3.DataSource = Modele.listeClients().Select(x => new
+                {
+                    x.Numcli,
+                    x.Nomcli,
+                    x.Prenomcli,
+                    x.Adrcli,
+                    x.Tel
+                });
+                dgvAffichage.DataSource = bsClients3;
+            }
+            if (cbAffichageDGV.SelectedIndex == 1)
+            {
+                bsPartitions2.DataSource = Modele.listePartitions().Select(x => new
+                {
+                    x.Numpart,
+                    x.Libpart,
+                    x.Prixpart
+                });
+                dgvAffichage.DataSource = bsPartitions2;
+            }
+            if (cbAffichageDGV.SelectedIndex == 2)
+            {
+                bsStyle.DataSource = Modele.listeStyle().Select(x => new
+                {
+                    x.Numstyle,
+                    x.Libstyle
+                });
+                dgvAffichage.DataSource = bsStyle;
+            }
             if (cbAffichageDGV.SelectedIndex == 3)
             {
                 bsLivreur2.DataSource = Modele.listeLivreur().Select(x => new
